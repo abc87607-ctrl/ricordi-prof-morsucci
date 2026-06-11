@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ricordi per la Prof. Morsucci</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Un ricordo per la Prof. Morsucci</title>
   <style>
     :root {
       --bg: #fffaf5;
-      --card: rgba(255, 255, 255, 0.88);
+      --card: rgba(255, 255, 255, 0.95);
       --text: #1f2937;
       --muted: #6b7280;
       --accent: #b45309;
@@ -15,72 +16,123 @@
       --border: rgba(180, 83, 9, 0.12);
       --shadow: 0 18px 40px rgba(124, 45, 18, 0.08);
     }
+
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
+      min-height: 100vh;
       background:
         radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 30%),
         radial-gradient(circle at top right, rgba(180, 83, 9, 0.12), transparent 26%),
         linear-gradient(180deg, #fffaf5 0%, #fff 55%, #fff9f1 100%);
-      min-height: 100vh;
     }
+
     .wrap {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 28px 16px 60px;
     }
+
     .hero {
-      background: linear-gradient(135deg, rgba(17,24,39,0.96), rgba(91,33,18,0.95));
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(91, 33, 18, 0.95));
       color: #fff;
       border-radius: 28px;
-      padding: 34px 24px;
+      padding: 24px;
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
     }
-    .hero:before, .hero:after {
+
+    .hero:before,
+    .hero:after {
       content: "";
       position: absolute;
       border-radius: 999px;
       filter: blur(8px);
-      opacity: .5;
+      opacity: 0.5;
+      pointer-events: none;
     }
-    .hero:before { width: 180px; height: 180px; background: rgba(249,115,22,.25); right: -40px; top: -40px; }
-    .hero:after { width: 220px; height: 220px; background: rgba(245,158,11,.18); left: -60px; bottom: -90px; }
+
+    .hero:before {
+      width: 180px;
+      height: 180px;
+      background: rgba(249, 115, 22, 0.25);
+      right: -40px;
+      top: -40px;
+    }
+
+    .hero:after {
+      width: 220px;
+      height: 220px;
+      background: rgba(245, 158, 11, 0.18);
+      left: -60px;
+      bottom: -90px;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       padding: 8px 12px;
       border-radius: 999px;
       font-size: 14px;
       margin-bottom: 16px;
       backdrop-filter: blur(10px);
+      width: fit-content;
     }
+
     h1 {
       margin: 0;
       font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: 1.08;
+      line-height: 1.05;
       letter-spacing: -0.03em;
       max-width: 16ch;
     }
+
     .lead {
       max-width: 760px;
       font-size: 1.05rem;
       line-height: 1.75;
-      color: rgba(255,255,255,.84);
+      color: rgba(255, 255, 255, 0.86);
       margin: 18px 0 0;
     }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
     }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -92,72 +144,109 @@
       border-radius: 16px;
       padding: 13px 18px;
       font-weight: 700;
-      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
       white-space: nowrap;
     }
-    .btn:hover { transform: translateY(-1px); }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
     .btn-primary {
       color: #fff;
       background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      box-shadow: 0 12px 30px rgba(180,83,9,.26);
+      box-shadow: 0 12px 30px rgba(180, 83, 9, 0.26);
     }
+
     .btn-secondary {
       color: #fff;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       backdrop-filter: blur(8px);
     }
+
+    .hero-media {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      min-height: 320px;
+      position: relative;
+    }
+
+    .hero-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .hero-media .fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 22px;
+      text-align: center;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 18px;
       margin-top: 18px;
     }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 24px;
       box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
+      overflow: hidden;
     }
-    .card-inner { padding: 22px; }
+
+    .card-inner {
+      padding: 22px;
+    }
+
     .section-title {
       margin: 0 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
+
     .section-subtitle {
       margin: 0 0 18px;
       color: var(--muted);
       line-height: 1.6;
-      font-size: .97rem;
+      font-size: 0.97rem;
     }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 18px 0 0;
-    }
-    @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
-    .stat {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px 16px;
-      background: #fff;
-    }
-    .stat .label { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
-    .stat .value { margin-top: 6px; font-size: 1.05rem; font-weight: 700; }
+
     .messages {
       display: grid;
       gap: 12px;
     }
+
     .message {
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 16px;
       background: #fff;
     }
+
     .message-head {
       display: flex;
       justify-content: space-between;
@@ -165,141 +254,179 @@
       gap: 12px;
       margin-bottom: 10px;
     }
-    .name { font-weight: 800; font-size: 1rem; }
-    .meta { color: var(--muted); font-size: .86rem; margin-top: 4px; }
-    .time { color: var(--muted); font-size: .84rem; white-space: nowrap; }
-    .message-text { margin: 0; line-height: 1.75; white-space: pre-wrap; }
+
+    .name {
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 4px;
+    }
+
+    .time {
+      color: var(--muted);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .message-text {
+      margin: 0;
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
     .empty {
-      border: 1px dashed rgba(180, 83, 9, .22);
+      border: 1px dashed rgba(180, 83, 9, 0.22);
       border-radius: 18px;
       padding: 20px;
       color: var(--muted);
-      background: rgba(255,255,255,.6);
+      background: rgba(255, 255, 255, 0.6);
     }
-    .small {
-      color: var(--muted);
-      font-size: .92rem;
-      line-height: 1.7;
-    }
+
     .pill {
       display: inline-block;
       border-radius: 999px;
       padding: 7px 12px;
-      font-size: .84rem;
+      font-size: 0.84rem;
       color: #7c2d12;
-      background: rgba(251, 146, 60, .14);
-      border: 1px solid rgba(251, 146, 60, .18);
+      background: rgba(251, 146, 60, 0.14);
+      border: 1px solid rgba(251, 146, 60, 0.18);
       margin-bottom: 12px;
     }
-    .footer-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.6;
-    }
-    .loading {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      animation: pulse 1.2s infinite ease-in-out;
-    }
-    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.4); opacity: 1; } }
+
     .notice {
       margin-top: 16px;
       border-left: 4px solid var(--accent-2);
       padding: 12px 14px;
-      background: rgba(255,255,255,.72);
+      background: rgba(255, 255, 255, 0.72);
       border-radius: 14px;
       color: var(--text);
       line-height: 1.7;
-      font-size: .95rem;
+      font-size: 0.95rem;
     }
-    .error {
-      color: #b91c1c;
-      background: rgba(254, 226, 226, .75);
-      border-left-color: #ef4444;
+
+    .form-card iframe {
+      display: block;
+      width: 100%;
+      height: 1280px;
+      border: 0;
+      background: #fff;
     }
-    code {
-      background: rgba(180, 83, 9, .08);
-      padding: 2px 6px;
-      border-radius: 8px;
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .link-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .link-back:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      .form-card iframe {
+        height: 1350px;
+      }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
-      <div class="badge">📚 Un ricordo per la Prof. Morsucci</div>
-      <h1>Lascia un ricordo dei tuoi anni di scuola con la prof!</h1>
-      <p class="lead">
-        Formule, teoremi, leggi della fisica, interrogazioni, verifiche ed esercizi impossibili:
-        qui raccogliamo ricordi, aneddoti e messaggi dedicati alla Prof.ssa Tamara Morsucci da ex studenti,
-        colleghi, amici e genitori.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://forms.gle/6jAyEtp2uZW18gXL7" target="_blank" rel="noreferrer">Lascia un ricordo</a>
-        <a class="btn btn-secondary" href="#messaggi">Vai alla bacheca</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><div class="label">Messaggi</div><div class="value" id="statMessages">0</div></div>
-        <div class="stat"><div class="label">Stato</div><div class="value">Solo approvati</div></div>
-        <div class="stat"><div class="label">Moderazione</div><div class="value">Prima della pubblicazione</div></div>
-      </div>
-      <div class="notice">
-        Tutti i contributi vengono approvati manualmente prima di comparire qui. Se un messaggio è anonimo,
-        verrà mostrato come <strong>Ex studente (maturità XXXX)</strong>.
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="badge">📚 Un ricordo per la Prof. Morsucci</div>
+          <h1>Lascia un ricordo dei tuoi anni di scuola con la prof!</h1>
+          <p class="lead">
+            Formule, teoremi, leggi della fisica, interrogazioni, verifiche ed esercizi impossibili:
+            qui raccogliamo ricordi, aneddoti e messaggi dedicati alla Prof.ssa Tamara Morsucci da ex studenti,
+            colleghi, amici e genitori.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#form">Lascia il tuo ricordo per la Prof</a>
+            <a class="btn btn-secondary" href="#messaggi">Vai alla bacheca</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <img id="heroImage" src="prof-morsucci.jpg" alt="Foto della Prof.ssa Morsucci" />
+          <div class="fallback" id="heroFallback">
+            Carica nella repository una foto con nome <strong>prof-morsucci.jpg</strong> per mostrarla qui.
+          </div>
+        </div>
       </div>
     </section>
 
     <div class="grid" id="messaggi">
       <section class="card">
         <div class="card-inner">
-          <div class="pill">Bacheca dei ricordi</div>
-          <h2 class="section-title">Messaggi approvati</h2>
-          <p class="section-subtitle">Qui compariranno solo i messaggi con <code>STATO = APPROVATO</code>.</p>
-          <div id="status" class="loading"><span class="dot"></span> Caricamento dei messaggi...</div>
-          <div id="messages" class="messages" style="display:none;"></div>
+          <div class="pill">Messaggi per la Prof</div>
+          <h2 class="section-title">Messaggi per la Prof</h2>
+          <p class="section-subtitle">
+            Le parole di chi vuole lasciare un saluto, un ricordo o un grazie speciale.
+          </p>
+          <div id="messages" class="messages">
+            <div class="empty">I primi messaggi compariranno qui appena saranno pronti.</div>
+          </div>
         </div>
       </section>
 
-      <aside class="card">
+      <section class="card form-card" id="form">
         <div class="card-inner">
-          <div class="pill">Come funziona</div>
-          <h2 class="section-title">Passaggi semplici</h2>
-          <p class="section-subtitle">La raccolta funziona così:</p>
-          <div class="small">
-            1. La persona compila il Google Form.<br>
-            2. Il messaggio arriva nel tuo Google Sheet.<br>
-            3. Tu cambi <strong>STATO</strong> in <strong>APPROVATO</strong>.<br>
-            4. La bacheca qui sotto si aggiorna e mostra il ricordo.
+          <div class="pill">Lascia il tuo ricordo per la Prof</div>
+          <h2 class="section-title">Lascia il tuo ricordo per la Prof</h2>
+          <p class="section-subtitle">
+            Compila il modulo qui sotto. Dopo l’invio comparirà il messaggio di conferma e potrai tornare alla bacheca.
+          </p>
+
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfcuz_cbOmzZ_eTpQ1DkVmjDs6Q9Nr3MVh3wJYwllVPtbBE9Q/viewform?embedded=true"
+            title="Modulo per lasciare un ricordo"
+          >Loading…</iframe>
+
+          <div class="form-actions">
+            <a class="link-back" href="#messaggi">← Clicca qui per tornare alla bacheca</a>
           </div>
+
           <div class="notice">
-            Se vuoi cambiare il testo del pulsante o il titolo, modifica questo file <code>index.html</code> e ricaricalo su GitHub.
-          </div>
-          <div class="footer-note">
-            Foglio dati collegato: <code>16wG0ZFVT4o7rhKxs8Lnu0f2ZCj609GPptQiOCwxcY0M</code>
+            Dopo l’invio, Google mostrerà la conferma del modulo. Qui sotto trovi sempre il link per tornare alla bacheca.
           </div>
         </div>
-      </aside>
+      </section>
     </div>
   </main>
 
   <script>
     const SHEET_ID = "16wG0ZFVT4o7rhKxs8Lnu0f2ZCj609GPptQiOCwxcY0M";
     const GID = "174883835";
-    const FORM_URL = "https://forms.gle/6jAyEtp2uZW18gXL7";
 
+    const heroImage = document.getElementById("heroImage");
+    const heroFallback = document.getElementById("heroFallback");
     const messagesEl = document.getElementById("messages");
-    const statusEl = document.getElementById("status");
-    const statMessagesEl = document.getElementById("statMessages");
+
+    if (heroImage) {
+      heroImage.addEventListener(
+        "error",
+        () => {
+          heroImage.style.display = "none";
+          if (heroFallback) heroFallback.style.display = "flex";
+        },
+        { once: true }
+      );
+    }
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -315,23 +442,44 @@
       let row = [];
       let cur = "";
       let inQuotes = false;
+
       for (let i = 0; i < text.length; i++) {
         const ch = text[i];
         const next = text[i + 1];
+
         if (inQuotes) {
-          if (ch === '"' && next === '"') { cur += '"'; i++; }
-          else if (ch === '"') { inQuotes = false; }
-          else { cur += ch; }
+          if (ch === '"' && next === '"') {
+            cur += '"';
+            i++;
+          } else if (ch === '"') {
+            inQuotes = false;
+          } else {
+            cur += ch;
+          }
         } else {
-          if (ch === '"') inQuotes = true;
-          else if (ch === ',') { row.push(cur); cur = ""; }
-          else if (ch === '\n') { row.push(cur); rows.push(row); row = []; cur = ""; }
-          else if (ch === '\r') { /* ignore */ }
-          else { cur += ch; }
+          if (ch === '"') {
+            inQuotes = true;
+          } else if (ch === ",") {
+            row.push(cur);
+            cur = "";
+          } else if (ch === "\n") {
+            row.push(cur);
+            rows.push(row);
+            row = [];
+            cur = "";
+          } else if (ch === "\r") {
+          } else {
+            cur += ch;
+          }
         }
       }
-      if (cur.length || row.length) { row.push(cur); rows.push(row); }
-      return rows.filter(r => r.some(cell => String(cell).trim() !== ""));
+
+      if (cur.length || row.length) {
+        row.push(cur);
+        rows.push(row);
+      }
+
+      return rows.filter((r) => r.some((cell) => String(cell).trim() !== ""));
     }
 
     function normalizeHeader(h) {
@@ -345,7 +493,7 @@
     function findColumn(headers, patterns) {
       for (let i = 0; i < headers.length; i++) {
         const h = normalizeHeader(headers[i]);
-        if (patterns.some(p => h.includes(p))) return i;
+        if (patterns.some((p) => h.includes(p))) return i;
       }
       return -1;
     }
@@ -357,13 +505,12 @@
       const label = row.anonimo === true
         ? `Ex studente${year ? ` (maturità ${year})` : ""}`
         : `${name}${year ? ` (maturità ${year})` : ""}`;
-      const timestamp = row.timestamp || "";
+
       return `
         <article class="message">
           <div class="message-head">
             <div>
               <div class="name">${escapeHtml(label)}</div>
-              <div class="meta">Ricordo approvato${timestamp ? ` · ${escapeHtml(timestamp)}` : ""}</div>
             </div>
             <div class="time">#${idx + 1}</div>
           </div>
@@ -374,9 +521,11 @@
 
     async function loadMessages() {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
+
       try {
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         const csv = await res.text();
         const data = parseCsv(csv);
         if (!data.length) throw new Error("Nessun dato trovato");
@@ -396,31 +545,26 @@
             year: idxYear >= 0 ? r[idxYear] : "",
             message: idxMessage >= 0 ? r[idxMessage] : "",
             anonimo: idxAnon >= 0 ? /^s/i.test(String(r[idxAnon] || "").trim()) : false,
-            status: idxStatus >= 0 ? String(r[idxStatus] || "").trim().toUpperCase() : "",
+            status: idxStatus >= 0 ? String(r[idxStatus] || "").trim().toUpperCase() : ""
           }))
-          .filter((row) => row.status === "APPROVATO")
+          .filter((row) => idxStatus < 0 || row.status === "APPROVATO")
           .sort((a, b) => (b.timestamp || "").localeCompare(a.timestamp || ""));
 
-        statMessagesEl.textContent = String(approved.length);
         if (!approved.length) {
-          messagesEl.innerHTML = `<div class="empty">Nessun messaggio approvato ancora. Il primo ricordo apparirà qui dopo la tua approvazione nel foglio Google.</div>`;
+          messagesEl.innerHTML = `<div class="empty">I primi messaggi compariranno qui appena saranno pronti.</div>`;
         } else {
           messagesEl.innerHTML = approved.map(formatCard).join("");
         }
-        statusEl.style.display = "none";
-        messagesEl.style.display = "grid";
       } catch (err) {
-        statusEl.classList.add("error");
-        statusEl.innerHTML = `Impossibile leggere il foglio Google in questo momento. Verifica che il foglio sia condiviso come <strong>Visualizzatore</strong> e che la colonna <strong>STATO</strong> contenga <code>APPROVATO</code>.`;
-        messagesEl.style.display = "none";
+        messagesEl.innerHTML = `<div class="empty">Impossibile caricare i messaggi in questo momento. Riprova tra poco.</div>`;
         console.error(err);
       }
     }
 
-    document.querySelectorAll('a[href="#messaggi"]').forEach(a => {
-      a.addEventListener('click', (e) => {
+    document.querySelectorAll('a[href="#messaggi"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
         e.preventDefault();
-        document.getElementById('messaggi').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById("messaggi").scrollIntoView({ behavior: "smooth" });
       });
     });
 
